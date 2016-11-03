@@ -1,0 +1,10 @@
+dependencies {
+	compile 'com.liferay.portal:com.liferay.portal.kernel:2.6.0'
+	compile 'org.osgi:org.osgi.core:5.0.0'
+	compile 'org.osgi:org.osgi.compendium:5.0.0'
+	compile 'com.liferay:com.liferay.osgi.util:2.0.4'
+	compile 'com.liferay:com.liferay.registry.api:1.0.0'
+	compile 'com.liferay:com.liferay.portal.configuration.metatype:2.0.0'
+	compile 'biz.aQute.bnd:biz.aQute.bndlib:3.1.0'
+	compile  project(':modules:antivirus-scanner-api')
+}

@@ -1,0 +1,3 @@
+Bundle-SymbolicName: clam.antivirus.cli.client
+Bundle-Version: 1.0.0
+Export-Package: it.liferay.symposium.antivirus.clam.client.cli

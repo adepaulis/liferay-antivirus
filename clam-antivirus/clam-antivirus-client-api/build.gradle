@@ -1,0 +1,4 @@
+dependencies {
+	compile 'com.liferay.portal:com.liferay.portal.kernel:2.6.0'
+	compile  project(':modules:antivirus-scanner-api')
+}
