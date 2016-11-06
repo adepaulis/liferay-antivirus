@@ -34,6 +34,9 @@ public class DLAntivirusScannerGateway
 	@Override
 	public void scan(File file) throws AntivirusScannerException {
 		
+		if(_log.isInfoEnabled())
+			_log.info("Scanning " + file.getName());
+		
 		try{
 			AntivirusScannerResult scanResult = 
 					_antivirusScanner.scan(file);
@@ -48,6 +51,9 @@ public class DLAntivirusScannerGateway
 			throw new AntivirusScannerException(
 					AntivirusScannerException.PROCESS_FAILURE);
 		}
+		
+		if(_log.isInfoEnabled())
+			_log.info("Scan completed no virus found");
 	}
 
 	private void throwIfNullOrVirus(AntivirusScannerResult scanResult)
@@ -58,6 +64,9 @@ public class DLAntivirusScannerGateway
 		}
 		else if(scanResult.equals(
 				AntivirusScannerResult.VIRUS_DETECTED)){
+			if(_log.isInfoEnabled())
+				_log.info("Virus Detected!");
+			
 			throw new AntivirusScannerException(
 					AntivirusScannerException.VIRUS_DETECTED);
 		}
@@ -99,6 +108,10 @@ public class DLAntivirusScannerGateway
 					AntivirusScannerUtil.getAntivirusScanner();
 			
 			antivirusScannerWrapper.setAntivirusScanner(this);
+			
+			if (_log.isInfoEnabled()) 
+				_log.info("DLAntivirusScannerGateway registered as "
+						+ "Document Library Antivirus");
 			
 		} catch (Exception e) {
 			_log.error("Error activating DLAntivirusScannerGateway");

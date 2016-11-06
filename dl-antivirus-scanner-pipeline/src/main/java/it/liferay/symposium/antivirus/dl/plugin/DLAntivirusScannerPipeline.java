@@ -41,11 +41,19 @@ public class DLAntivirusScannerPipeline extends BaseFileAntivirusScanner{
 				AntivirusScannerResult scanResult = scanner.scan(file);	
 				throwIfNullOrVirus(scanResult);
 			}
+			
+
+		}
+		catch(AntivirusScannerException avE){
+			throw avE;
 		}
 		catch(Exception e){
 			_log.error(e, e);
 			throw new AntivirusScannerException(AntivirusScannerException.PROCESS_FAILURE);
 		}
+		
+		if(_log.isInfoEnabled())
+			_log.info("Scan completed no virus found");
 	}
 	
 	@Deactivate
@@ -77,6 +85,9 @@ public class DLAntivirusScannerPipeline extends BaseFileAntivirusScanner{
 		}
 		else if(scanResult.equals(
 				AntivirusScannerResult.VIRUS_DETECTED)){
+			if(_log.isInfoEnabled())
+				_log.info("Virus Detected!");
+			
 			throw new AntivirusScannerException(
 					AntivirusScannerException.VIRUS_DETECTED);
 		}
@@ -92,6 +103,10 @@ public class DLAntivirusScannerPipeline extends BaseFileAntivirusScanner{
 			
 			antivirusScannerWrapper.setAntivirusScanner(this);
 
+			if (_log.isInfoEnabled()) 
+				_log.info("DL Antivirus Scanner Pipeline registered as "
+						+ "Document Library Antivirus");
+			
 			_serviceTracker = ServiceTrackerFactory.
 					open(AntivirusScannerService.class);
 			
